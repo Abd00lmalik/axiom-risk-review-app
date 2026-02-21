@@ -30,7 +30,7 @@ function toHash(s: string): Hash {
 }
 
 export const CONTRACT_ADDRESS =
-  "0x708bc7f60C2c6B13aD9C31641E3ac009F6638F04" as `0x${string}`
+  "0xF51d31128aA793cC86f10f02B266be59f35a29B4" as `0x${string}`
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Public status labels (maps to GenLayer TransactionStatus enum values)
