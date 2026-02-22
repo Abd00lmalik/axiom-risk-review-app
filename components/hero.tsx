@@ -33,7 +33,7 @@ export function Hero() {
             className="text-[10px] font-mono tracking-widest uppercase"
             style={{ color: "hsl(197 100% 47% / 0.8)" }}
           >
-            GenLayer Builders Program
+            Powered by Genlayer
           </span>
         </div>
       </motion.div>
