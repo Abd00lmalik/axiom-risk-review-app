@@ -1,40 +1,27 @@
-/**
- * components/axiom-logo.tsx
- *
- * Mark concept: two angular chevrons (< >) enclosing a single verification
- * dot — reads as "review", "inspect", "validate". No shields, no locks,
- * no chains, no generic crypto imagery.
- *
- * The mark works at 20px (favicon territory) through 48px (hero).
- * The wordmark is optional via the `showWordmark` prop.
- */
+"use client"
+
+import { motion } from "framer-motion"
 
 interface AxiomLogoProps {
-  /** Height of the mark in px. Width scales proportionally. Default: 28 */
   size?: number
-  /** Show the "Axiom" wordmark beside the mark. Default: true */
   showWordmark?: boolean
   className?: string
 }
 
-export function AxiomLogo({
-  size = 28,
-  showWordmark = true,
-  className = "",
-}: AxiomLogoProps) {
+export function AxiomLogo({ size = 28, showWordmark = true, className = "" }: AxiomLogoProps) {
   return (
-    <span
-      className={`inline-flex items-center gap-2.5 select-none ${className}`}
-      aria-label="Axiom"
-    >
-      {/* ── Mark ── */}
+    <span className={`inline-flex items-center gap-2.5 select-none ${className}`} aria-label="Axiom">
       <AxiomMark size={size} />
-
-      {/* ── Wordmark ── */}
       {showWordmark && (
         <span
-          className="font-semibold tracking-tight text-foreground"
-          style={{ fontSize: size * 0.64, lineHeight: 1 }}
+          style={{
+            fontFamily: "'Syne', system-ui, sans-serif",
+            fontSize: size * 0.68,
+            fontWeight: 700,
+            letterSpacing: "-0.02em",
+            lineHeight: 1,
+            color: "hsl(210 40% 94%)",
+          }}
         >
           Axiom
         </span>
@@ -43,58 +30,37 @@ export function AxiomLogo({
   )
 }
 
-interface MarkProps {
-  size: number
-}
-
-export function AxiomMark({ size }: MarkProps) {
-  // Viewbox is 24×24. We scale via width/height.
+export function AxiomMark({ size }: { size: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/*
-        Left chevron  — angled bracket pointing left
-        Stroke: primary colour at full opacity
-      */}
+    <svg width={size} height={size} viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <polyline
-        points="9,5 4,12 9,19"
-        stroke="currentColor"
-        strokeWidth="1.75"
+        points="11,5 4,14 11,23"
+        stroke="hsl(197, 100%, 47%)"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-primary"
       />
-
-      {/*
-        Right chevron — angled bracket pointing right
-        Stroke: primary colour at 55% opacity — creates depth
-      */}
       <polyline
-        points="15,5 20,12 15,19"
-        stroke="currentColor"
-        strokeWidth="1.75"
+        points="17,5 24,14 17,23"
+        stroke="hsl(197, 100%, 47%)"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="text-primary"
-        opacity="0.55"
+        opacity="0.4"
       />
-
-      {/*
-        Centre verification dot
-        Small filled circle — the "signal" being reviewed
-      */}
-      <circle
-        cx="12"
-        cy="12"
-        r="1.5"
-        fill="currentColor"
-        className="text-primary"
+      <motion.circle
+        cx="14" cy="14" r="2"
+        fill="hsl(197, 100%, 47%)"
+        animate={{ opacity: [1, 0.4, 1], scale: [1, 1.3, 1] }}
+        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.circle
+        cx="14" cy="14" r="4.5"
+        stroke="hsl(197, 100%, 47%)"
+        strokeWidth="0.7"
+        fill="none"
+        animate={{ opacity: [0.25, 0.05, 0.25] }}
+        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
       />
     </svg>
   )

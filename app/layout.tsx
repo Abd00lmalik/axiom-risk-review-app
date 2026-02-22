@@ -1,49 +1,33 @@
-import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import type { Metadata } from "next"
+import "./globals.css"
 import { Footer } from "@/components/footer"
 import { DisclaimerModal } from "@/components/disclaimer-modal"
-import "./globals.css"
-
-const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-})
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-})
 
 export const metadata: Metadata = {
-  title: "Axiom Risk Review | Decentralized Risk Intelligence",
-  description:
-    "Intelligent Smart Contract verification with validator consensus. Analyze any crypto project for smart contract, tokenomics, and market risks.",
+  title: "Axiom Risk Review",
+  description: "Decentralized risk intelligence for crypto projects. AI-proposed, validator-confirmed, on-chain.",
+  openGraph: {
+    title: "Axiom Risk Review",
+    description: "AI-proposed. Validator-confirmed. On-chain.",
+    type: "website",
+  },
 }
 
-export const viewport: Viewport = {
-  themeColor: "#0b0f19",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-}
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans antialiased min-h-screen flex flex-col">
-        {/* First-run disclaimer — localStorage-gated, renders once per user */}
-        <DisclaimerModal />
-
-        {/* Page content */}
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="flex flex-col min-h-screen antialiased">
         <div className="flex-1">{children}</div>
-
-        {/* Persistent disclaimer footer */}
         <Footer />
+        <DisclaimerModal />
       </body>
     </html>
   )
